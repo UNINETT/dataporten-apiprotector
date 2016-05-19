@@ -1,4 +1,4 @@
-# Feide Connect API Gatekeeper Expressjs Middleware
+# Dataporten Gatekeeper Expressjs Middleware
 
 Install FeideConnectAPI using npm:
 
