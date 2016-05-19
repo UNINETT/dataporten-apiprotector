@@ -1,5 +1,5 @@
 
 
-var FeideConnectAPI = require('./lib/FeideConnectAPI').FeideConnectAPI;
-exports.FeideConnectAPI = FeideConnectAPI;
+var DataportenAPI = require('./lib/DataportenAPI').DataportenAPI;
+exports.DataportenAPI = DataportenAPI;
 

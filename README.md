@@ -2,12 +2,12 @@
 
 Install FeideConnectAPI using npm:
 
-	npm install feideconnectapi --save
+	npm install dataportenapi --save
 
 Then include it in your ExpressJS server application:
 
 
-	var FeideConnectAPI = require('feideconnectapi').FeideConnectAPI;
+	var DataportenAPI = require('dataportenapi').DataportenAPI;
 
 
 Register your API at Connect Dashboard:
@@ -19,12 +19,12 @@ Point your API endpoint in Dashboard to your ExpressJS API.
 And initialize FeideConnectAPI using the password that was generated for trust between Feide Connect API Gatekeeper and your ExpressJS API:
 
 
-	var fc = new FeideConnectAPI({
+	var fc = new DataportenAPI({
 	    "password": "30d63d9b-3574-4832-be37-0c93121fca21"
 	});
 
 
-FeideConnectAPI comes with several middlewares. First the optional `cors()` middleware, and then the important `setup()` middleware that establish trust and parses the incoming request headers.
+DataportenAPI comes with several middlewares. First the optional `cors()` middleware, and then the important `setup()` middleware that establish trust and parses the incoming request headers.
 
 A typical use is this:
 
@@ -38,9 +38,9 @@ Within a request handler, you may access some information:
 	router.get('/', function(req, res) {
 	    res.json({ 
 	        "message": 'hooray! welcome to our api!',
-	        "youMustBe": req.feideconnect.userid,
-	        "accessingUsingThisClient": req.feideconnect.clientid,
-	        "withTheseSubScopes": req.feideconnect.scopes
+	        "youMustBe": req.dataporten.userid,
+	        "accessingUsingThisClient": req.dataporten.clientid,
+	        "withTheseSubScopes": req.dataporten.scopes
 	    });
 	});
 
@@ -52,8 +52,8 @@ You may easily use the `policy()` middleware to apply some kind of authorization
 	router.get('/write', fc.policy({requireScopes: ["write"], requireUserUnlessScopes: ["clientonly"]}), function(req, res) {
 	    res.json({ 
 	        message: 'This endpoint is slightly more protected',
-	        "youMustBe": req.feideconnect.userid,
-	        "usingClient": req.feideconnect.clientid
+	        "youMustBe": req.dataporten.userid,
+	        "usingClient": req.dataporten.clientid
 	    });
 	});
 
@@ -71,7 +71,7 @@ A simpler example:
 	router.get('/', fc.policy({requireUser: true}), function(req, res) {
 	    res.json({ 
 	        message: 'hooray! welcome to our api!',
-	        "youMustBe": req.feideconnect.userid
+	        "youMustBe": req.dataporten.userid
 	    });
 	});
 
