@@ -1,6 +1,6 @@
 # Dataporten Gatekeeper Expressjs Middleware
 
-Install FeideConnectAPI using npm:
+Install Dataporten API Protector using npm:
 
 	npm install dataportenapi --save
 
@@ -12,11 +12,11 @@ Then include it in your ExpressJS server application:
 
 Register your API at Connect Dashboard:
 
-* <https://dashboard.feideconnect.no>
+* <https://dashboard.dataporten.no>
 
 Point your API endpoint in Dashboard to your ExpressJS API.
 
-And initialize FeideConnectAPI using the password that was generated for trust between Feide Connect API Gatekeeper and your ExpressJS API:
+And initialize Dataporten API Protector using the password that was generated for trust between Dataporten API Gatekeeper and your ExpressJS API:
 
 
 	var fc = new DataportenAPI({
@@ -36,7 +36,7 @@ Within a request handler, you may access some information:
 
 	var router = express.Router();
 	router.get('/', function(req, res) {
-	    res.json({ 
+	    res.json({
 	        "message": 'hooray! welcome to our api!',
 	        "youMustBe": req.dataporten.userid,
 	        "accessingUsingThisClient": req.dataporten.clientid,
@@ -50,7 +50,7 @@ You may easily use the `policy()` middleware to apply some kind of authorization
 
 
 	router.get('/write', fc.policy({requireScopes: ["write"], requireUserUnlessScopes: ["clientonly"]}), function(req, res) {
-	    res.json({ 
+	    res.json({
 	        message: 'This endpoint is slightly more protected',
 	        "youMustBe": req.dataporten.userid,
 	        "usingClient": req.dataporten.clientid
@@ -69,9 +69,8 @@ A simpler example:
 
 
 	router.get('/', fc.policy({requireUser: true}), function(req, res) {
-	    res.json({ 
+	    res.json({
 	        message: 'hooray! welcome to our api!',
 	        "youMustBe": req.dataporten.userid
 	    });
 	});
-
