@@ -1,6 +1,6 @@
 {
   "name": "dataportenapi",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "ExpressJS Middleware layer that easily lets you use Dataporten for authentication and authorization.",
   "main": "index.js",
   "scripts": {
